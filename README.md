@@ -1,4 +1,3 @@
-# GuessTheColor
 # Guess the Color Game
 
 A fun and interactive game where players are presented with an RGB color code, and they have to guess the correct color from six color boxes. You have only 10 moves to find the correct color. 
@@ -17,6 +16,23 @@ A fun and interactive game where players are presented with an RGB color code, a
 - **Limited Moves**: Players have only 10 moves to guess the correct color, adding a challenge.
 - **Responsive Design**: The game works seamlessly on desktop and mobile devices.
 - **Visual Feedback**: Correct guesses are highlighted, and incorrect guesses are dimmed.
+
+## How to Play Locally
+
+1. **Clone the repository** to your local machine:
+
+    ```bash
+    git clone https://github.com/alishbaa90/GuessTheColor.git
+    ```
+
+2. **Navigate** to the project directory:
+
+    ```bash
+    cd GuessTheColor
+    ```
+
+3. **Open the `index.html`** file in your web browser to start playing.
+
 
 ## Demo
 
