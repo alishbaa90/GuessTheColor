@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Color Game</title>
+    <style>
+        body{
+            background-color: burlywood;
+        }
+        body h1{
+            font-size: 60px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: rgb(65, 14, 14);
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        .box{
+            font-size: 35px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+        }
+        .grid{
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(2, 100px);
+            position: absolute;
+        }
+        .grid-Item{
+            height: 90px;
+            width: 90px;
+            background-color: aquamarine;
+            display: flex;
+            border-radius: 10px;
+            margin-top: 70px;
+            margin-left: 500px;
+            cursor: pointer;
+        }
+        .msg{
+            font-size: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            margin-top: 300px;
+            color: rgb(25, 46, 3);
+        }
+        #next-btn {
+            
+            font-size: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-left: 600px;
+            border-radius: 50px;
+            border: none;
+            background-color: coral;
+            font-size: 25px;
+
+        }
+        #next-btn:hover{
+            background-color: rgb(165, 81, 51);
+        }
+    </style>
+</head>
+<body>
+    <h1>GUESS THE COLOR!</h1>
+    <div class="box" id="b">
+        <p id="colorToGuess"></p>
+    </div>
+    <div class="grid" id="color">
+        <div class="grid-Item" id="1"></div>
+        <div class="grid-Item" id="2"></div>
+        <div class="grid-Item" id="3"></div>
+        <div class="grid-Item" id="4"></div>
+        <div class="grid-Item" id="5"></div>
+        <div class="grid-Item" id="6"></div>
+    </div>
+    <div class="msg" id="Message"></div> 
+    <button id="next-btn">Next</button>
+
+    <script>
+        const colorboxes = document.getElementsByClassName("grid-Item");
+        const colorToGuessElement = document.getElementById("colorToGuess");
+        const messageElement = document.getElementById("Message");
+        const nextButton = document.getElementById("next-btn");
+        const colors = [];
+        let guessCount = 0;
+        const maxGuesses = 10;
+        let score = 0;
+        let colorToGuess = '';
+
+        function startGame() {
+            guessCount = 0;
+            colors.length = 0; // Clear previous colors
+            getRandomColors();
+            nextButton.style.display = "none";
+            messageElement.innerText = '';
+            colorToGuessElement.textContent = '';
+        }
+
+        function getRandomColors() {
+            Array.from(colorboxes).forEach(e => {
+                const color = getRandomColor();
+                e.style.backgroundColor = color;
+                colors.push(color);
+
+                e.addEventListener("click", () => {
+                    guessColor(color);
+                });
+            });
+
+            const randomIndex = Math.floor(Math.random() * colors.length);
+            colorToGuess = colors[randomIndex];
+            colorToGuessElement.textContent = colorToGuess;
+        }
+
+        function getRandomColor() {
+            let val1 = Math.floor(Math.random() * 256);
+            let val2 = Math.floor(Math.random() * 256);
+            let val3 = Math.floor(Math.random() * 256);
+            return `rgb(${val1}, ${val2}, ${val3})`;
+        }
+
+        function guessColor(clickedColor) {
+            if (guessCount < maxGuesses) {
+                if (colorToGuess === clickedColor) {
+                    messageElement.innerText = `You guessed it right!`;
+                    score++;
+                    nextButton.style.display = "block";
+                } else {
+                    messageElement.innerText = `You guessed it wrong! ${maxGuesses - guessCount - 1} guesses left.`;
+                    nextButton.style.display = "block";
+                }
+            } else {
+                endGame();
+            }
+        }
+
+        function endGame() {
+            messageElement.innerText = `Game Over! Final Score: ${score}`;
+            nextButton.style.display = "none";
+            Array.from(colorboxes).forEach(e => e.removeEventListener("click", () => {}));
+        }
+
+        function handleNextButton() {
+            guessCount++;
+            if (guessCount < maxGuesses) {
+                colors.length = 0; // Clear previous colors
+                getRandomColors();
+                nextButton.style.display = "none";
+                messageElement.innerText = '';
+            } else {
+                endGame();
+            }
+        }
+
+        nextButton.addEventListener("click", handleNextButton);
+
+        // Start the game initially
+        startGame();
+    </script>
+</body>
+</html>
