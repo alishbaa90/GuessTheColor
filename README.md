@@ -35,7 +35,6 @@ A fun and interactive game where players are presented with an RGB color code, a
 
 
 ## Demo
-
 You can play the game live [here](#).
 
 ## Programming Languages Used
