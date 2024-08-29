@@ -33,10 +33,6 @@ A fun and interactive game where players are presented with an RGB color code, a
 
 3. **Open the `index.html`** file in your web browser to start playing.
 
-
-## Demo
-You can play the game live [here](#).
-
 ## Programming Languages Used
 
 ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white&style=flat)
